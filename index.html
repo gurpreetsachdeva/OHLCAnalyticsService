@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Web Server Ticker Subscription Page</title>
+      <title>TODO supply a title</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,
+         initial-scale=1.0">
+
+      <script type="text/javascript">
+         var uri = "ws://localhost:8080/OHLCAnalyticsService/tickers";
+         var websocket = null;
+         var message = "";
+         function openConnection() {
+            websocket = new WebSocket(uri);
+            websocket.onmessage = function (event) {
+               var node = document.getElementById('fromServer');
+               var newNode = document.createElement('h1');
+               newNode.appendChild(document.
+                  createTextNode(event.data));
+               node.appendChild(newNode);
+            };
+         }
+
+         function closeConnection() {
+            websocket.close();
+         }
+
+         function sendMessage() {
+            var msg = document.getElementById('messageText').value;
+           // alert("Subscribed to Topic:"+msg);
+            websocket.send(msg);
+         }
+      </script>
+
    </head>
-   
-   <script src = "js/socket.io.js"></script>
-   <script>
-      var socket = io();
-      function setUsername() {
-    	  alert("Subscribed Confirmation");
-         socket.emit('setUsername', document.getElementById('name').value);
-      };
-      var user;
-      socket.on('userExists', function(data) {
-         document.getElementById('error-container').innerHTML = data;
-      });
-      socket.on('userSet', function(data) {
-         user = data.username;
-         document.body.innerHTML = '<input type = "text" id = "message">\
-         <button type = "button" name = "button" onclick = "sendMessage()">Send</button>\
-         <div id = "message-container"></div>';
-      });
-      function sendMessage() {
-         var msg = document.getElementById('message').value;
-         if(msg) {
-            socket.emit('msg', {message: msg, user: user});
-         }
-      }
-      socket.on('newmsg', function(data) {
-         if(user) {
-            document.getElementById('message-container').innerHTML += '<div><b>' + 
-               data.user + '</b>: ' + data.message + '</div>'
-         }
-      })
-   </script>
-   
-   <body>
-      <div id = "error-container"></div>
-      <input id = "name" type = "text" name = "name" value = "" 
-         placeholder = "Enter your Ticker!">
-      <button type = "button" name = "button" onclick = "setUsername()">
-         Subscribe To a Ticker Please!
-      </button>
+   <body onload="openConnection();" onunload="closeConnection();">
+      <div>
+         <p>Ticker Subscription <input id="messageText" type="text"/>
+            <input id="sendButton" type="button" value="Send"
+               onclick="sendMessage();"/>
+         </p>
+         <div id="fromServer"></div>
+      </div>
    </body>
 </html>
