@@ -5,6 +5,7 @@ import java.util.concurrent.BlockingQueue;
 
 import com.github.gurpreetsachdeva.OHLCAnalyticsService.model.BarResponse;
 import com.github.gurpreetsachdeva.OHLCAnalyticsService.model.TradesData;
+import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.service.PubSubService;
 
 /**
  * Hello world!
@@ -16,6 +17,7 @@ public class App
 	private Long TIME_CONVERTER = 1000000000L;
 	private  BlockingQueue<TradesData> queue = new ArrayBlockingQueue<>(10000);
 	private  BlockingQueue<BarResponse> barResponses = new ArrayBlockingQueue<>(10000);
+	private PubSubService pubSubService=new PubSubService();
 	
 
 //	private Map<String,Set<>>
@@ -25,16 +27,16 @@ public class App
     public static void main( String[] args ) throws InterruptedException
     {
     	
-    	//MAKE SURE YOU RUN ONE CONSUME AT LEAST
-        //new Thread(new WebSockerWorker(app.getBarResponses(),topicName[1]),"BarConsumer-"+threadCount+topicName[0]).start();
-        // java App filePath:/home/gurpreet/trades-data/trades.json Worker3:XETHXXBT Worker4:XICNXXBT
-    	// You can create N workers for consumption
+    	/*MAKE SURE YOU RUN ONE CONSUME AT LEAST
+        new Thread(new WebSockerWorker(app.getBarResponses(),topicName[1]),"BarConsumer-"+threadCount+topicName[0]).start();
+        java App filePath:/home/gurpreet/trades-data/trades.json Worker3:XETHXXBT Worker4:XICNXXBT
+    	You can create N workers for consumption*/
     
-
     	App app=new App();
-    	handleCommandLineArgs(args, app);
-        Thread worker1=new Thread(new FileReaderWorker(app.getQueue(),app.getFilePath()),"FileReaderThreadPool");
-        Thread worker2=new Thread(new FSMWorker(app.getQueue(),app.getTIME_CONVERTER(),app.getBarResponses()),"BarProducer");
+    	app.getPubSubService().setQueue(new ArrayBlockingQueue<>(10000));
+    	handleCommandLineArgs(args, app);//Also handles the creation of Producers
+        Thread worker1=new Thread(new FileReaderWorker(app.getQueue(),app.getFilePath()),"FileReaderThreadPool");//In Future instead of a single producer ,make 10 threads with same design
+        Thread worker2=new Thread(new FSMWorker(app.getQueue(),app.getTIME_CONVERTER(),app.getPubSubService()),"BarProducer");
         worker1.start();
         worker2.start();
       
@@ -55,7 +57,7 @@ public class App
         		app.setFilePath(topicName[1]);
         	}
         	else {
-        	new Thread(new WebSockerWorker(app.getBarResponses(),topicName[1]),"BarConsumer-"+threadCount+topicName[0]).start();
+        	new Thread(new WebSockerWorker(app.getPubSubService(),topicName[1]),"BarConsumer-"+threadCount+topicName[0]).start();
         	threadCount+=1;
         	}
         }
@@ -116,5 +118,19 @@ public class App
 
 	public void setBarResponses(BlockingQueue<BarResponse> barResponses) {
 		this.barResponses = barResponses;
+	}
+
+
+
+
+	public PubSubService getPubSubService() {
+		return pubSubService;
+	}
+
+
+
+
+	public void setPubSubService(PubSubService pubSubService) {
+		this.pubSubService = pubSubService;
 	}
 }

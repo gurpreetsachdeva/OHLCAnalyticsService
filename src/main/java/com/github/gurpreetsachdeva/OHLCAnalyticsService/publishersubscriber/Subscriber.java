@@ -10,9 +10,10 @@ import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.serv
 
 public abstract class Subscriber {	
 	
-	private Map<String, List<Subscriber>> subscribersTopicMap = new ConcurrentHashMap<>();
 	//store all messages received by the subscriber
 	private List<BarResponse> subscriberMessages = new ArrayList<BarResponse>();
+	//Keep two types of subscriber, one for the clients running in JVM1 and others for Remote services
+	private String type;
 	
 	public List<BarResponse> getSubscriberMessages() {
 		return subscriberMessages;
@@ -21,12 +22,6 @@ public abstract class Subscriber {
 		this.subscriberMessages = subscriberMessages;
 	}
 	
-	public Map<String, List<Subscriber>> getSubscribersTopicMap() {
-		return subscribersTopicMap;
-	}
-	public void setSubscribersTopicMap(Map<String, List<Subscriber>> subscribersTopicMap) {
-		this.subscribersTopicMap = subscribersTopicMap;
-	}
 	//Add subscriber with PubSubService for a topic
 	public abstract void addSubscriber(String topic, PubSubService pubSubService);
 	
