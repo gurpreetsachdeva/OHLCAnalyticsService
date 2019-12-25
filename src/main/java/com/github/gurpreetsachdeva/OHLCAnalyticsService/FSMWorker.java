@@ -68,8 +68,8 @@ public class FSMWorker implements Runnable, Publisher {
 						td.getP(), lastBar.getBar_num() + 1, sym, td.getTS2(), 1L);
 				barResponses.add(br);
 				publish(lastBar);
-				System.out.println(Thread.currentThread().getName()+lastBar);
-				System.out.println(Thread.currentThread().getName()+queue.size());
+				//System.out.println(Thread.currentThread().getName()+lastBar);
+				//System.out.println(Thread.currentThread().getName()+queue.size());
 
 			} else {
 				if (td.getP() < lastBar.getL()) {

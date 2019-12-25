@@ -12,7 +12,7 @@ import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.Subs
 public class PubSubService {
 
 	// Keeps List of subscriber topic wise, using set to prevent duplicates
-	private Map<String, List<Subscriber>> subscribersTopicMap = new ConcurrentHashMap<>();
+	private Map<String, List<Subscriber>> subscribersTopicMap=new ConcurrentHashMap<String, List<Subscriber>>();
 
 	// Holds BarResponses published by publishers
 	private BlockingQueue<BarResponse> queue;
@@ -53,19 +53,22 @@ public class PubSubService {
 	public void broadcast() {
 		try {
 			BarResponse br = queue.take();
-			System.out.println(br);
+			//System.out.println(br);
 			String topic = br.getSymbol();
-				System.out.println(Thread.currentThread().getName()+topic);
+				//System.out.println(subscribersTopicMap);
+				//System.out.println(topic);
 				
 
 				List<Subscriber> subscribersOfTopic = subscribersTopicMap.get(topic);
-				System.out.println(Thread.currentThread().getName()+"Thread.currentThread().getName()*****************");
-				System.out.println(queue.size());
+				//System.out.println(subscribersOfTopic);
+				//System.out.println(Thread.currentThread().getName()+"Thread.currentThread().getName()*****************");
+				//System.out.println(queue.size());
 				if (subscribersOfTopic != null) {
 					for (Subscriber subscriber : subscribersOfTopic) {
 						// add broadcasted BarResponse to subscribers BarResponse queue
 						List<BarResponse> subscriberBarResponses = subscriber.getSubscriberMessages();
 						subscriberBarResponses.add(br);
+						System.out.println(Thread.currentThread().getName()+"   Subscriber     "+subscriber+"    "+br);
 
 					}
 				
@@ -75,7 +78,7 @@ public class PubSubService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Passing Bar Name as topic");
+		//System.out.println("Passing Bar Name as topic");
 	}
 
 	// Sends BarResponses about a topic for subscriber at any point

@@ -17,11 +17,16 @@ public class WebSockerWorker extends Subscriber implements Runnable {
 	public WebSockerWorker(PubSubService pubSubService, String topic) {
 		// TODO Auto-generated constructor stub
 		this.service = pubSubService;
+		
 		List<Subscriber> subscribers = this.service.getSubscribersTopicMap().get(topic);
 		if (subscribers == null) {
 			subscribers = new ArrayList<>();
 		}
 		subscribers.add(this);
+		
+		this.service.getSubscribersTopicMap().put(topic,subscribers);
+		System.out.println("Added");
+		
 		this.topic = topic;
 	}
 
