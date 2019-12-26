@@ -61,6 +61,10 @@ Steps To Run ?
 	Also you can give a max heap size as well:
 	java -Xmx2048M -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
 	
+	One More Option:
+	
+	java -Xmx3048M -XX:PermSize=1048M -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
+	
 
 	
 	sudo apt-get install openjdk-8-jdk
