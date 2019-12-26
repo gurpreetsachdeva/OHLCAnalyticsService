@@ -116,6 +116,10 @@ Test Run for Checking Streaming Data:
 
 Tar Without .git to keep the blob from expanding : tar cvz --exclude=".git" -f OHLCAnalyticsService.tar.gz OHLCAnalyticsService/
 
+Memory Analysis using MAT
+===================================
+1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in screenshot folder
+
 ToDos
 ========
 1. Make everything configurable by reading through property file and not dependent on App Driver class constants.
