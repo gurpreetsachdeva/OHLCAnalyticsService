@@ -52,7 +52,9 @@ Steps To Run ?
 4. Make sure you have Java 8 or later  and Maven in your path.
 	if not install at a Ec2 or linux box:
 	
+	Try this first : java -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
 	sudo apt-get install openjdk-8-jdk
+	
 	sudo apt install maven
 5. On the repository do a mvn clean install
 6 Open the index.html directly into the browser by dragging and dropping. You can also host this at a nginx server. This file connects to your websocket.
