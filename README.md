@@ -33,7 +33,7 @@ Now What to Do ?
 	
 4. Another Thread Pool for Web Sockets which will consume the packets from Publishing service.
 5. One Important thing, when keeping bars for a sym. Just keep the last 5000 bars as to keep the memory consumption to a certain threshold. Obviously assumption is that this service will keep a certain range of tickers only.
-6. You can also start Java Threads as well as test this through a web client.
+6. You can also start Java WorkerThreads passed in command line OR  as well as test this through a web client OR BOTH.
 7. Block until something new Gets written to the trade file and stream it to the corresponding subscribers in real time.
 8. No of Trades represent how many trades were used for each bar, just extra information.
 9. If tom someone wants get a bar in semicomplete state[bar_num wont change,for every trade just blindly push], thats also possible so had both implemented below.{Currently configured for complete state but semicomlete state requires only a single line change in publish bars).
