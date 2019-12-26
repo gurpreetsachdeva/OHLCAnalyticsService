@@ -100,7 +100,7 @@ Test Run for Checking Streaming Data:
 2. cat trades.json|grep XMLNXETH > new.json
 3. Open the UI and subscribe to let us say ABC.
 4. You will see not see any output for ABC tickers as it is not in the trade file yet.
-5. Replace the XMLNXETH to ABC for generating new set of Trades.
+5. Replace the XMLNXETH to ABC for generating new set of Trades. What works better than vim for this. %s/XMLNXETH/ABC/g
 3. Append new.json to trades.json , so this acts as a feeder for me.
 4. cat new.json >> trades.json
 5 You will observe that your UI client will get refreshed by the New Trades. I just utilized the 
