@@ -17,6 +17,8 @@ Rough Design
 Never Ever Do This :
 ==============================
 1. Dont Load the full File ever or Dont keep the file Data as a whole in Memory.
+2. Always remember that a finite state machine can generate the next bar by having the last Bar.
+3. Pub Sub Service History will have only N days history and not from the start of the world. This is defined by a constant and went with this approach to keep your service safe from dying a painful Memory Full death.
 
 
 Now What to Do ?
