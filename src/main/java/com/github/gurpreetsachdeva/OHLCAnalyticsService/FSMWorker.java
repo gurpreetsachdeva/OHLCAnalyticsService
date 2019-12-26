@@ -1,10 +1,10 @@
 package com.github.gurpreetsachdeva.OHLCAnalyticsService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.github.gurpreetsachdeva.OHLCAnalyticsService.model.BarResponse;
 import com.github.gurpreetsachdeva.OHLCAnalyticsService.model.TradesData;
@@ -16,7 +16,7 @@ public class FSMWorker implements Runnable, Publisher {
 	private BlockingQueue<TradesData> queue;
 	private Long TIME_CONVERTER;
 	private PubSubService service;
-	private Map<String, List<BarResponse>> symBars = new HashMap<>();
+	private Map<String, List<BarResponse>> symBars = new ConcurrentHashMap<>();
 
 	public FSMWorker(BlockingQueue<TradesData> queue, Long tIME_CONVERTER, PubSubService service) {
 		super();
