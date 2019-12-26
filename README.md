@@ -126,6 +126,8 @@ Memory Analysis using MAT
 Some Important Points and Commands To Remember:
 =====================================================
 1. No of Native Threads at Native level for an OS :ulimit –u
+2. Must Read :https://www.baeldung.com/java-permgen-metaspace
+-XX:PermSize=1048M -Xmx2048M options are must understand
 
 ToDos
 ========
