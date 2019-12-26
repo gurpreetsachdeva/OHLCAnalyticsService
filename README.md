@@ -16,7 +16,9 @@ Rough Design
 Never Ever Do This :
 ==============================
 1. Dont Load the full File ever or Dont keep the file Data in Memory.
-2. 
+
+
+
 
 
 Now What to Do ?
@@ -32,6 +34,7 @@ Now What to Do ?
 6. You can also start Java Threads as well as test this through a web client.
 7. Block until something new Gets written to the trade file and stream it to the corresponding subscribers in real time.
 8. No of Trades represent how many trades were used for each bar, just extra information.
+9. If tom someone wants get a bar in semicomplete state[bar_num wont change,for every trade just blindly push], thats also possible so had both implemented below.{Currently configured for complete state but semicomlete state requires only a single line change in publish bars).
 
 Screenshots For Runnable Tests:
 ================================================================
@@ -62,7 +65,7 @@ Commands :
 	java -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT
 	
 	See Screenshot for below command :TwoConsumersOutputCommandLine.png
-	java -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT
+	java -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:/home/gurpreet/trades-data/trades.json
 	
 	Prefix of workername can be anything you want a see in logs.
 3  N Subscribers 
