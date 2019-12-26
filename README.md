@@ -18,9 +18,6 @@ Never Ever Do This :
 1. Dont Load the full File ever or Dont keep the file Data in Memory.
 
 
-
-
-
 Now What to Do ?
 ==============================
 1. Use Three different subsystems i.e Decouple architecture to make a daemon Java Process . We will also use Pub Sub pattern.
@@ -90,6 +87,20 @@ Install Java :sudo apt-get install openjdk-8-jdk
 Clone the code from github or download the tar.gz file in the root folder of github repository given by Gurpreet.
 tar -xvzf fileName.tar.gz or git clone https://github.com/gurpreetsachdeva/OHLCAnalyticsService
 Run java command to start the daemon service or you can do an Right Click Run on Eclipse Java Project as well. Both should work but I have given the command below
+
+
+Test Run for Checking Streaming Data:
+======================================
+1. Keep the java daemon Running.
+2. cat trades.json|grep XMLNXETH > new.json
+3. Open the UI and subscribe to let us say ABC.
+4. You will see not see any output for ABC tickers as it is not in the trade file yet.
+5. Replace the XMLNXETH to ABC for generating new set of Trades.
+3. Append new.json to trades.json , so this acts as a feeder for me.
+4. cat new.json >> trades.json
+5 You will observe that your UI client will get refreshed by the New Trades. I just utilized the 
+
+
 
 ToDos
 ========
