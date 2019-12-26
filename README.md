@@ -58,6 +58,13 @@ Steps To Run ?
 	
 	java -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
 	
+	Also you can give a max heap size as well:
+	java -Xmx2048M -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
+	
+	One More Option:
+	
+	java -Xmx3048M -XX:PermSize=1048M -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
+	
 
 	
 	sudo apt-get install openjdk-8-jdk
@@ -120,7 +127,12 @@ Memory Analysis using MAT
 ===================================
 1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in the folder Perfomance inside Screenshots folder.
 2. It shows the impact of PubSub Service historical records, they are the ones who consume memory but not significant as expected.[8.9MB]
-
+Some Important Points and Commands To Remember:
+=====================================================
+1. No of Native Threads at Native level for an OS :ulimit –u
+2. Must Read :https://www.baeldung.com/java-permgen-metaspace
+-XX:PermSize=1048M -Xmx2048M options are must understand
+3. https://dzone.com/articles/troubleshoot-outofmemoryerror-unable-to-create-new
 
 ToDos
 ========
