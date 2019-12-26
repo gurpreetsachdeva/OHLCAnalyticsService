@@ -46,6 +46,7 @@ public class FSMWorker implements Runnable, Publisher {
 
 	}
 
+	/*Business Logic For Bar Generation*/
 	private void publishBars(TradesData td) {
 
 		String sym = td.getSym();
@@ -68,9 +69,7 @@ public class FSMWorker implements Runnable, Publisher {
 						td.getP(), lastBar.getBar_num() + 1, sym, td.getTS2(), 1L);
 				barResponses.add(br);
 				publish(lastBar);
-				//System.out.println(Thread.currentThread().getName()+lastBar);
-				//System.out.println(Thread.currentThread().getName()+queue.size());
-
+				
 			} else {
 				if (td.getP() < lastBar.getL()) {
 					lastBar.setL(td.getP());

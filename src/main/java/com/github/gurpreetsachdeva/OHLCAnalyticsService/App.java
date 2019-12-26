@@ -1,5 +1,9 @@
 package com.github.gurpreetsachdeva.OHLCAnalyticsService;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.UnknownHostException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -11,6 +15,7 @@ import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.serv
  * Hello world!
  *
  */
+
 public class App 
 {
 	private String filePath = "/home/gurpreet/trades-data/trades.json";
@@ -18,6 +23,7 @@ public class App
 	private  BlockingQueue<TradesData> queue = new ArrayBlockingQueue<>(10000);
 	private  BlockingQueue<BarResponse> barResponses = new ArrayBlockingQueue<>(10000);
 	private PubSubService pubSubService=new PubSubService();
+	private int port=8887;
 	
 
 //	private Map<String,Set<>>
@@ -39,11 +45,38 @@ public class App
         Thread worker2=new Thread(new FSMWorker(app.getQueue(),app.getTIME_CONVERTER(),app.getPubSubService()),"BarProducer");
         worker1.start();
         worker2.start();
-      
+        
+        try {
+			app.startWebSocketServer();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
              
     }
 
+    public void startWebSocketServer() throws IOException, InterruptedException {
+    	System.out.println(this.port);
+    	TradeBarUpdater s = new TradeBarUpdater(this.port);
+    	s.setService(this.getPubSubService());
+		s.start();
+		System.out.println( "WebSocket started on port: " + s.getPort() );
 
+		BufferedReader sysin = new BufferedReader( new InputStreamReader( System.in ) );
+		while ( true ) {
+			String in = sysin.readLine();
+			s.broadcast( in );
+			if( in.equals( "exit" ) ) {
+				s.stop(1000);
+				break;
+			}
+		}
+    }
 
 
 	private static void handleCommandLineArgs(String[] args, App app) {
