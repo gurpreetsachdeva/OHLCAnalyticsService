@@ -29,11 +29,8 @@ public class App
 	
     public static void main( String[] args ) throws InterruptedException
     {
-    	
-    	/*MAKE SURE YOU RUN ONE CONSUME AT LEAST
-        new Thread(new WebSockerWorker(app.getBarResponses(),topicName[1]),"BarConsumer-"+threadCount+topicName[0]).start();
-        java App filePath:/home/gurpreet/trades-data/trades.json Worker3:XETHXXBT Worker4:XICNXXBT
-    	You can create N workers for consumption*/
+    	//java -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:/home/gurpreet/trades-data/trades.json
+    	//You can create N workers for consumption , Either web Or Java Console based
     
     	App app=new App();
     	app.getPubSubService().setQueue(new ArrayBlockingQueue<>(10000));
@@ -85,7 +82,7 @@ public class App
         	
         	String[] topicName=arg.split(":");
         	if(topicName[0].equals("filePath")) {
-        		System.out.println("OverWriting file Path"+topicName[1]);
+        		System.out.println("OverWriting file Path "+topicName[1]);
         		app.setFilePath(topicName[1]);
         	}
         	else {
