@@ -152,7 +152,7 @@ public class PubSubService {
 					for (BarResponse br : responses) {
 					System.out.println(ls);
 					if(!ls.isNewSubscriber()) {
-					System.out.println("Calling History Bars for every subscriber");
+				//	System.out.println("Calling History Bars for every subscriber");
 
 					ls.callBack(br.toString());
 					}
