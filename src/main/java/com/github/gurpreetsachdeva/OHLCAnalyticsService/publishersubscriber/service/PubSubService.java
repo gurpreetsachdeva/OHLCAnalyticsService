@@ -43,10 +43,14 @@ public class PubSubService {
 		if (subscribersTopicMap.containsKey(topic)) {
 			List<Subscriber> subscribers = subscribersTopicMap.get(topic);
 			subscribers.add(subscriber);
+			System.out.println("Adding Subscriber");
+			subscribersTopicMap.put(topic, subscribers);
 		} else {
 			List<Subscriber> subscribers = new ArrayList<>();
 			subscribers.add(subscriber);
 			subscribersTopicMap.put(topic, subscribers);
+			System.out.println("Adding Subscriber");
+
 		}
 	}
 
@@ -131,15 +135,32 @@ public class PubSubService {
 
 	public void getMessagesForSubscriberOfTopic(String topic, Subscriber s) {
 		// TODO Auto-generated method stub
+		System.out.println("Running for Topic"+topic);
+		System.out.println(s);
 		List<BarResponse> responses = this.historyBars.get(topic);
 
 		if (responses != null) {
-			for (BarResponse br : responses) {
-				s.callBack(br.toString());
+			
+			List<Subscriber> subscribersOfTopic = subscribersTopicMap.get(topic);
+			System.out.println(subscribersOfTopic);
+			
+				for (Subscriber ls:subscribersOfTopic) {
+					for (BarResponse br : responses) {
+					System.out.println(ls);
+					if(!ls.isNewSubscriber()) {
+					System.out.println("Calling History Bars for every subscriber");
+
+					ls.callBack(br.toString());
+					}
+					ls.setNewSubscriber(false);;
+				}
+				
+				
 			}
 		}
 
 		// Queue Current Bars from queue
+		System.out.println("Calling Live bars");
 		this.getCurrentStreamingBars();
 
 	}

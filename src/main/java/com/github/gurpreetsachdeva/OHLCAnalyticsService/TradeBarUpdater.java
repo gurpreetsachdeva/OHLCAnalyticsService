@@ -23,7 +23,15 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 
 	private PubSubService service;
 	private String topic;
-	
+	private boolean newSubscriber;
+	public boolean isNewSubscriber() {
+		return newSubscriber;
+	}
+
+	public void setNewSubscriber(boolean newSubscriber) {
+		this.newSubscriber = newSubscriber;
+	}
+
 	List <BarResponse> responses;
 	public PubSubService getService() {
 		return service;
@@ -57,18 +65,17 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 	@Override
 	public void onMessage( WebSocket conn, String message ) {
 		broadcast( "Subscribed to "+message );
-    	new Thread(new WebSockerWorker(this.service,message),"Web Consumer for "+message).start();
-
+		this.service.addSubscriber(message, this);
+		new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
+    	//new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
 		
 		System.out.println( conn + ": " + message );
 	}
 	@Override
 	public void onMessage( WebSocket conn, ByteBuffer message ) {
-		broadcast( message.array() );
+	//	broadcast( message.array() );
 		System.out.println( conn + ": " + message );
-    	Thread t=new Thread(this,"Web Connection :"+conn);
-    	t.start();
-    	System.out.println(t.getName());
+    	
 
 	}
 
@@ -111,6 +118,7 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 	@Override
 	public void callBack(String message) {
 		// TODO Auto-generated method stub
+		System.out.println("In Callback of Subscriber");
 		for(WebSocket S:this.getConnections()) {
 			
 			this.onMessage(S, message);

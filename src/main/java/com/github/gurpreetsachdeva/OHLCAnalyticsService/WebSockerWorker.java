@@ -10,6 +10,8 @@ import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.serv
 public class WebSockerWorker implements Runnable,Subscriber {
 
 	private String topic;
+	
+	private boolean newSubscriber;
 	// You can even hear multiple tickers as well :)
 
 	private PubSubService service;
@@ -88,6 +90,14 @@ public class WebSockerWorker implements Runnable,Subscriber {
 	@Override
 	public String toString() {
 		return "WebSockerWorker [topic=" + topic + "]";
+	}
+
+	public boolean isNewSubscriber() {
+		return newSubscriber;
+	}
+
+	public void setNewSubscriber(boolean newSubscriber) {
+		this.newSubscriber = newSubscriber;
 	}
 
 }

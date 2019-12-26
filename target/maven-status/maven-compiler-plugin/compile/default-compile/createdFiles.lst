@@ -1,13 +1,10 @@
+com/github/gurpreetsachdeva/OHLCAnalyticsService/TradeBarUpdater.class
+com/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/Subscriber.class
 com/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/Publisher.class
+com/github/gurpreetsachdeva/OHLCAnalyticsService/FSMWorker.class
 com/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/service/PubSubService.class
-META-INF/maven/com.github.gurpreetsachdeva/OHLCAnalyticsService/pom.xml
 com/github/gurpreetsachdeva/OHLCAnalyticsService/model/TradesData.class
 com/github/gurpreetsachdeva/OHLCAnalyticsService/App.class
 com/github/gurpreetsachdeva/OHLCAnalyticsService/model/BarResponse.class
-com/github/gurpreetsachdeva/OHLCAnalyticsService/TradeBarUpdater.class
-com/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/Subscriber.class
-META-INF/maven/com.github.gurpreetsachdeva/OHLCAnalyticsService/pom.properties
-com/github/gurpreetsachdeva/OHLCAnalyticsService/FSMWorker.class
 com/github/gurpreetsachdeva/OHLCAnalyticsService/WebSockerWorker.class
 com/github/gurpreetsachdeva/OHLCAnalyticsService/FileReaderWorker.class
-META-INF/MANIFEST.MF

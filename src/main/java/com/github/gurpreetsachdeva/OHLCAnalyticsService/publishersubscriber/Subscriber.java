@@ -26,5 +26,8 @@ public interface Subscriber {
 	
 	public List<BarResponse> getBarResponses();
 	public void setBarResponses(List<BarResponse> br);
+	public boolean isNewSubscriber();
+	public void setNewSubscriber(boolean newSubscriber);
+
 	
 }
