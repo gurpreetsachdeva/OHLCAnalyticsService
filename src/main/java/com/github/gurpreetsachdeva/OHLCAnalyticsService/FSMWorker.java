@@ -16,7 +16,9 @@ public class FSMWorker implements Runnable, Publisher {
 	private BlockingQueue<TradesData> queue;
 	private Long TIME_CONVERTER;
 	private PubSubService service;
-	private Map<String, List<BarResponse>> symBars = new ConcurrentHashMap<>();
+	//
+	//Two important things , for every ticker you just care about the last Bar and Secondly Tomorrow instead of a single thread multiple threads might be updating bars.
+	private Map<String, BarResponse> symBars = new ConcurrentHashMap<>();
 
 	public FSMWorker(BlockingQueue<TradesData> queue, Long tIME_CONVERTER, PubSubService service) {
 		super();
@@ -51,23 +53,21 @@ public class FSMWorker implements Runnable, Publisher {
 
 		String sym = td.getSym();
 
-		List<BarResponse> barResponses = symBars.get(sym);
-		if (barResponses == null) {
-			barResponses = new ArrayList<>();
-			BarResponse br = new BarResponse(td.getP(), td.getP(), td.getP(), td.getP(), td.getQ(), td.getP(), 1, sym,
+		BarResponse lastBar = symBars.get(sym);
+		if (lastBar == null) {
+			 lastBar = new BarResponse(td.getP(), td.getP(), td.getP(), td.getP(), td.getQ(), td.getP(), 1, sym,
 					td.getTS2(), 1L);
-			barResponses.add(br);
-			symBars.put(sym, barResponses);
+			symBars.put(sym, lastBar);
 
 		} else {
-			BarResponse lastBar = barResponses.get(barResponses.size() - 1);
 			Long barStartTime = lastBar.getTs2();
 			if (td.getTS2() >= (barStartTime + 15 * TIME_CONVERTER)) {
 				lastBar.setC(lastBar.getPrevious());
 
 				BarResponse br = new BarResponse(td.getP(), td.getP(), td.getP(), td.getP(), lastBar.getV() + td.getQ(),
 						td.getP(), lastBar.getBar_num() + 1, sym, td.getTS2(), 1L);
-				barResponses.add(br);
+				symBars.put(sym,br);
+				
 				publish(lastBar);
 				
 			} else {
