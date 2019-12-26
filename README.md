@@ -24,9 +24,13 @@ Now What to Do ?
 1. Use Three different subsystems i.e Decouple architecture to make a daemon Java Process . We will also use Pub Sub pattern.
 2. Keeping  a Thread for each of the different files[in our cases its just a single file], This will read line by line[You could have done a batch read also], and put it a Thread Safe Queue.
 3. Another Thread Pool named FSM , will take Trades Data and generate Bars for that.It is a publisher.
+
 	i. Logic For bar Generation is simple , Every new trade will define the open bar or modify the previous bar.
+	
 	ii. Till the time moves on to barStartTime+15 seconds, keep on updating the Bar Data for every sym e.g Volume,High,Low updates.
+	
 	iii. If time moves to New bar, update close of Previous bar and also publish this bar to the Publishing Service
+	
 4. Another Thread Pool for Web Sockets which will consume the packets from Publishing service.
 5. One Important thing, when keeping bars for a sym. Just keep the last 5000 bars as to keep the memory consumption to a certain threshold. Obviously assumption is that this service will keep a certain range of tickers only.
 6. You can also start Java Threads as well as test this through a web client.
