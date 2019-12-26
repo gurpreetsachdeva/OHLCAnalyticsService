@@ -181,4 +181,8 @@ public class PubSubService {
 		this.queue = queue;
 	}
 
+	public List<BarResponse> getHistoryBars(String topic) {
+		return historyBars.get(topic);
+	}
+
 }

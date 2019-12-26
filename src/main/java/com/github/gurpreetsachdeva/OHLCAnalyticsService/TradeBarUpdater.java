@@ -1,7 +1,5 @@
 package com.github.gurpreetsachdeva.OHLCAnalyticsService;
 
-
-
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
@@ -19,15 +17,16 @@ import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.Subs
 import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.service.PubSubService;
 
 /**
-* A simple WebSocket Subscriber
-*/
-public class TradeBarUpdater extends WebSocketServer implements Subscriber{
+ * A simple WebSocket Subscriber
+ */
+public class TradeBarUpdater extends WebSocketServer implements Subscriber {
 
 	private PubSubService service;
 	private String topic;
 	private boolean newSubscriber;
-	private Map<String,List<WebSocket>> topicConnMap=new HashMap<String, List<WebSocket>>();
-	private Map<WebSocket,String>	reverseLookup=new HashMap<>();
+	private Map<String, List<WebSocket>> topicConnMap = new HashMap<String, List<WebSocket>>();
+	private Map<WebSocket, String> reverseLookup = new HashMap<>();
+
 	public boolean isNewSubscriber() {
 		return newSubscriber;
 	}
@@ -36,7 +35,8 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 		this.newSubscriber = newSubscriber;
 	}
 
-	List <BarResponse> responses;
+	List<BarResponse> responses;
+
 	public PubSubService getService() {
 		return service;
 	}
@@ -45,74 +45,79 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 		this.service = service;
 	}
 
-	public TradeBarUpdater( int port ) throws UnknownHostException {
-		super( new InetSocketAddress( port ) );
+	public TradeBarUpdater(int port) throws UnknownHostException {
+		super(new InetSocketAddress(port));
 	}
 
-	public TradeBarUpdater( InetSocketAddress address ) {
-		super( address );
-	}
-
-	@Override
-	public void onOpen( WebSocket conn, ClientHandshake handshake ) {
-		conn.send("Welcome to the server!"); //This method sends a message to the new client
-	//	broadcast( "new connection: " + handshake.getResourceDescriptor() ); //This method sends a message to all clients connected
-		System.out.println( conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!" );
+	public TradeBarUpdater(InetSocketAddress address) {
+		super(address);
 	}
 
 	@Override
-	public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
-	//	broadcast( conn + " has left the room!" );
-		System.out.println( conn + " has left the room!" );
-		String topic=this.reverseLookup.get(conn);
+	public void onOpen(WebSocket conn, ClientHandshake handshake) {
+		conn.send("Welcome to the server!"); // This method sends a message to the new client
+		// broadcast( "new connection: " + handshake.getResourceDescriptor() ); //This
+		// method sends a message to all clients connected
+		System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " entered the room!");
+	}
+
+	@Override
+	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+		// broadcast( conn + " has left the room!" );
+		System.out.println(conn + " has left the room!");
+		String topic = this.reverseLookup.get(conn);
 		this.topicConnMap.get(topic).remove(conn);
 		this.reverseLookup.remove(conn);
-		
-	}
-
-	@Override
-	public void onMessage( WebSocket conn, String message ) {
-		//broadcast( "Subscribed to "+message );
-		if(message.startsWith("CallbackService")) {
-			
-			conn.send("BarResponse  "+message.substring("CallbackService".length()));
-			
-		}
-		else
-		{
-		
-		
-		conn.send("Subscribed to "+message);
-		this.reverseLookup.put(conn, message);
-		List<WebSocket> connections=this.topicConnMap.get(message);
-		if(connections==null) {
-			connections=new ArrayList<>();
-			this.service.addSubscriber(message, this);
-			
-		}
-		connections.add(conn);
-		new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
-
-		this.topicConnMap.put(message,connections);
-		
-		
-		
-		System.out.println( conn + ": " + message );
-		}
-	}
-	@Override
-	public void onMessage( WebSocket conn, ByteBuffer message ) {
-	//	broadcast( message.array() );
-		System.out.println( conn + ": " + message );
-    	
 
 	}
 
 	@Override
-	public void onError( WebSocket conn, Exception ex ) {
+	public void onMessage(WebSocket conn, String message) {
+		// broadcast( "Subscribed to "+message );
+		if (message.startsWith("CallbackService")) {
+
+			conn.send("BarResponse  " + message.substring("CallbackService".length()));
+
+		} else {
+
+			conn.send("Subscribed to " + message);
+			this.reverseLookup.put(conn, message);
+			List<WebSocket> connections = this.topicConnMap.get(message);
+			if (connections == null) {
+				connections = new ArrayList<>();
+				this.service.addSubscriber(message, this);
+				new Thread(new WebSockerWorker(this.service, message), "Web Consumer-" + conn).start();
+
+			}
+			connections.add(conn);
+
+			// Dont Create new Threads everytime , instead for every topic there should be a
+			// consumption thread running.
+			List<BarResponse> history = this.service.getHistoryBars(message);
+			for (BarResponse br : history) {
+				conn.send("BarResponse  " + br);
+
+			}
+
+			this.topicConnMap.put(message, connections);
+
+			System.out.println(conn + ": " + message);
+		}
+	}
+
+	@Override
+	public void onMessage(WebSocket conn, ByteBuffer message) {
+		// broadcast( message.array() );
+		System.out.println(conn + ": " + message);
+
+	}
+
+	@Override
+	public void onError(WebSocket conn, Exception ex) {
 		ex.printStackTrace();
-		if( conn != null ) {
-			// some errors like port binding failed may not be assignable to a specific websocket
+		if (conn != null) {
+			// some errors like port binding failed may not be assignable to a specific
+			// websocket
 		}
 	}
 
@@ -128,36 +133,36 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 	public void addSubscriber(String topic, PubSubService pubSubService) {
 		// TODO Auto-generated method stub
 		pubSubService.addSubscriber(topic, this);
-		
+
 	}
 
 	@Override
 	public void unSubscribe(String topic, PubSubService pubSubService) {
 		// TODO Auto-generated method stub
 		pubSubService.removeSubscriber(topic, this);
-		
+
 	}
 
 	@Override
 	public void getMessagesForSubscriberOfTopic(String topic, PubSubService pubSubService) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void callBack(String message) {
-		
+
 		// TODO Auto-generated method stub
-		//Retrieve Symbol from Message
+		// Retrieve Symbol from Message
 		System.out.println("In Callback of Subscriber");
-		
-		String sym=message.substring(message.indexOf("symbol")+7);
-		sym=sym.substring(0,sym.indexOf(","));
-	
-		for(WebSocket S:this.topicConnMap.get(sym)) {
-			
-			this.onMessage(S, "CallbackService"+message);
-			
+
+		String sym = message.substring(message.indexOf("symbol") + 7);
+		sym = sym.substring(0, sym.indexOf(","));
+
+		for (WebSocket S : this.topicConnMap.get(sym)) {
+
+			this.onMessage(S, "CallbackService" + message);
+
 		}
 	}
 
@@ -170,23 +175,23 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 	@Override
 	public void setBarResponses(List<BarResponse> br) {
 		// TODO Auto-generated method stub
-		this.responses=br;
-		
+		this.responses = br;
+
 	}
-	
+
 	public TradeBarUpdater(PubSubService pubSubService, String topic) {
 		// TODO Auto-generated constructor stub
 		this.service = pubSubService;
-		
+
 		List<Subscriber> subscribers = this.service.getSubscribersTopicMap().get(topic);
 		if (subscribers == null) {
 			subscribers = new ArrayList<>();
 		}
 		subscribers.add(this);
-		
-		this.service.getSubscribersTopicMap().put(topic,subscribers);
+
+		this.service.getSubscribersTopicMap().put(topic, subscribers);
 		System.out.println("Added");
-		
+
 		this.topic = topic;
 	}
 
