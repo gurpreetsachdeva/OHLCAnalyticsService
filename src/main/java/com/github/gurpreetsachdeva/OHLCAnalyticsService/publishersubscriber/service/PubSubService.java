@@ -11,6 +11,7 @@ import com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.Subs
 
 public class PubSubService {
 
+	private int MAX_HISTORY_SIZE=100000;
 	// Keeps List of subscriber topic wise, using set to prevent duplicates
 	private Map<String, List<Subscriber>> subscribersTopicMap = new ConcurrentHashMap<String, List<Subscriber>>();
 
