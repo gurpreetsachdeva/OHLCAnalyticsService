@@ -26,9 +26,6 @@ public class App
 	private int port=8887;
 	
 
-//	private Map<String,Set<>>
-	
-
 	
     public static void main( String[] args ) throws InterruptedException
     {
@@ -42,11 +39,12 @@ public class App
     	app.getPubSubService().setQueue(new ArrayBlockingQueue<>(10000));
     	handleCommandLineArgs(args, app);//Also handles the creation of Producers
         Thread worker1=new Thread(new FileReaderWorker(app.getQueue(),app.getFilePath()),"FileReaderThreadPool");//In Future instead of a single producer ,make 10 threads with same design
-        Thread worker2=new Thread(new FSMWorker(app.getQueue(),app.getTIME_CONVERTER(),app.getPubSubService()),"BarProducer");
+        Thread worker2=new Thread(new FSMWorker(app.getQueue(),app.getTIME_CONVERTER(),app.getPubSubService()),"JavaCommandWorker");
         worker1.start();
         worker2.start();
         
         try {
+        	//Start Third Thread for Web Server 
 			app.startWebSocketServer();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -87,9 +85,11 @@ public class App
         	
         	String[] topicName=arg.split(":");
         	if(topicName[0].equals("filePath")) {
+        		System.out.println("OverWriting file Path"+topicName[1]);
         		app.setFilePath(topicName[1]);
         	}
         	else {
+        	System.out.println("Creating Java Command Line Subscriber with name in logs as "+topicName[1]);
         	new Thread(new WebSockerWorker(app.getPubSubService(),topicName[1]),"BarConsumer-"+threadCount+topicName[0]).start();
         	threadCount+=1;
         	}
