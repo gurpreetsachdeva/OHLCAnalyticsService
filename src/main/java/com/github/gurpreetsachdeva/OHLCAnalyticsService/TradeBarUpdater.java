@@ -64,9 +64,12 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 
 	@Override
 	public void onMessage( WebSocket conn, String message ) {
-		broadcast( "Subscribed to "+message );
+		//broadcast( "Subscribed to "+message );
+		conn.send("Subscribed to "+message);
+		
 		this.service.addSubscriber(message, this);
 		new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
+	//	this.service.getMessagesForSubscriberOfTopic(message, this);
     	//new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
 		
 		System.out.println( conn + ": " + message );
