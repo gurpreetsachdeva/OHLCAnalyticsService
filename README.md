@@ -16,7 +16,7 @@ Rough Design
 
 Never Ever Do This :
 ==============================
-1. Dont Load the full File ever or Dont keep the file Data in Memory.
+1. Dont Load the full File ever or Dont keep the file Data as a whole in Memory.
 
 
 Now What to Do ?
