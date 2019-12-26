@@ -118,7 +118,9 @@ Tar Without .git to keep the blob from expanding : tar cvz --exclude=".git" -f O
 
 Memory Analysis using MAT
 ===================================
-1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in screenshot folder
+1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in the folder Perfomance inside Screenshots folder.
+2. It shows the impact of PubSub Service historical records, they are the ones who consume memory but not significant as expected.[8.9MB]
+
 
 ToDos
 ========
