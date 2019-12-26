@@ -1,8 +1,9 @@
 OHLCAnalyticsService
 =========================================
 
-Please Read all the parts before starting the application
-A Multithreaded Daemon for parsing Trades and generating JSON Data for Bar Charts
+Please Read all the parts before starting the application.
+
+A Multithreaded Daemon Application for parsing Trades and generating JSON Data for Bar Charts. 
 
 Brief Description of the problem:
 ===============================================
