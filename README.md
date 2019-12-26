@@ -123,7 +123,9 @@ Memory Analysis using MAT
 ===================================
 1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in the folder Perfomance inside Screenshots folder.
 2. It shows the impact of PubSub Service historical records, they are the ones who consume memory but not significant as expected.[8.9MB]
-
+Some Important Points and Commands To Remember:
+=====================================================
+1. No of Native Threads at Native level for an OS :ulimit –u
 
 ToDos
 ========
