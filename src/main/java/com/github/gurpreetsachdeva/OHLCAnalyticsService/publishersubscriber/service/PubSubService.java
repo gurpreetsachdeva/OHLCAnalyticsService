@@ -29,6 +29,10 @@ public class PubSubService {
 				responses = new ArrayList<>();
 			}
 			responses.add(br);
+			if(responses.size()>MAX_HISTORY_SIZE) {
+				//Dude for Every Ticket Keep only a constant size list of "Fully" published bars, Assumption is if a client comes back after N days , he wont be interesed in the subscription from the start of the world.
+				responses.remove(0);
+			}
 			historyBars.put(br.getSymbol(), responses);
 
 		} catch (InterruptedException e) {
