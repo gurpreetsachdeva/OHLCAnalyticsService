@@ -1,0 +1,354 @@
+Thread 0xd7aeb2d8
+
+  locals:
+
+Thread 0xd748be70
+  at sun.nio.fs.LinuxWatchService.poll(II)I (Native Method)
+  at sun.nio.fs.LinuxWatchService.access$600(II)I (LinuxWatchService.java:47)
+  at sun.nio.fs.LinuxWatchService$Poller.run()V (LinuxWatchService.java:314)
+  at java.lang.Thread.run()V (Thread.java:748)
+
+  locals:
+    objectId=0xd748bd60, line=2
+    objectId=0xd748be70, line=3
+
+Thread 0x85b12060
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.util.TimerThread.mainLoop()V (Timer.java:552)
+  at java.util.TimerThread.run()V (Timer.java:505)
+
+  locals:
+    objectId=0x85b12060, line=1
+    objectId=0x85b12c20, line=1
+    objectId=0x85b129f8, line=1
+    objectId=0x85b12c50, line=1
+    objectId=0x85b12060, line=2
+
+Thread 0x85b2a020
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b2a1a0, line=1
+    objectId=0x85b2a020, line=1
+    objectId=0x85b2a1a0, line=2
+    objectId=0x85b2a1b8, line=2
+    objectId=0x85b2a1d8, line=3
+    objectId=0x85b2a208, line=3
+    objectId=0x85b2a218, line=3
+    objectId=0x85b2a020, line=4
+
+Thread 0x85b2c020
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b2c1a0, line=1
+    objectId=0x85b2c020, line=1
+    objectId=0x85b2c1a0, line=2
+    objectId=0x85b2c1b8, line=2
+    objectId=0x85b2c1d8, line=3
+    objectId=0x85b2c208, line=3
+    objectId=0x85b2c218, line=3
+    objectId=0x85b2c020, line=4
+
+Thread 0x85b2e020
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b2e1a0, line=1
+    objectId=0x85b2e020, line=1
+    objectId=0x85b2e1a0, line=2
+    objectId=0x85b2e1b8, line=2
+    objectId=0x85b2e1d8, line=3
+    objectId=0x85b2e208, line=3
+    objectId=0x85b2e218, line=3
+    objectId=0x85b2e020, line=4
+
+Thread 0x85b0c088
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b0c208, line=1
+    objectId=0x85b0c088, line=1
+    objectId=0x85b0c208, line=2
+    objectId=0x85b0c220, line=2
+    objectId=0x85b0c240, line=3
+    objectId=0x85b0c270, line=3
+    objectId=0x85b0c280, line=3
+    objectId=0x85b0c088, line=4
+
+Thread 0x85b2a2a8
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b2a428, line=1
+    objectId=0x85b2a2a8, line=1
+    objectId=0x85b2a428, line=2
+    objectId=0x85b2a440, line=2
+    objectId=0x85b2a460, line=3
+    objectId=0x85b2a490, line=3
+    objectId=0x85b2a4a0, line=3
+    objectId=0x85b2a2a8, line=4
+
+Thread 0x85b2c360
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b2c4e0, line=1
+    objectId=0x85b2c360, line=1
+    objectId=0x85b2c4e0, line=2
+    objectId=0x85b2c4f8, line=2
+    objectId=0x85b2c518, line=3
+    objectId=0x85b2c548, line=3
+    objectId=0x85b2c558, line=3
+    objectId=0x85b2c360, line=4
+
+Thread 0x85b0c3c8
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b0c548, line=1
+    objectId=0x85b0c3c8, line=1
+    objectId=0x85b0c548, line=2
+    objectId=0x85b0c560, line=2
+    objectId=0x85b0c580, line=3
+    objectId=0x85b0c5b0, line=3
+    objectId=0x85b0c5c0, line=3
+    objectId=0x85b0c3c8, line=4
+
+Thread 0x85b2e228
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingQueue.take()Ljava/lang/Object; (LinkedBlockingQueue.java:442)
+  at org.java_websocket.server.WebSocketServer$WebSocketWorker.run()V (WebSocketServer.java:990)
+
+  locals:
+    objectId=0x85b2e3a8, line=1
+    objectId=0x85b2e228, line=1
+    objectId=0x85b2e3a8, line=2
+    objectId=0x85b2e3c0, line=2
+    objectId=0x85b2e3e0, line=3
+    objectId=0x85b2e410, line=3
+    objectId=0x85b2e420, line=3
+    objectId=0x85b2e228, line=4
+
+Thread 0x85b2a5e8
+  at sun.nio.ch.EPollArrayWrapper.epollWait(JIJI)I (Native Method)
+  at sun.nio.ch.EPollArrayWrapper.poll(J)I (EPollArrayWrapper.java:269)
+  at sun.nio.ch.EPollSelectorImpl.doSelect(J)I (EPollSelectorImpl.java:93)
+  at sun.nio.ch.SelectorImpl.lockAndDoSelect(J)I (SelectorImpl.java:86)
+  at sun.nio.ch.SelectorImpl.select(J)I (SelectorImpl.java:97)
+  at org.java_websocket.server.WebSocketServer.run()V (WebSocketServer.java:328)
+  at java.lang.Thread.run()V (Thread.java:748)
+
+  locals:
+    objectId=0x85b13090, line=1
+    objectId=0x85b12ec8, line=2
+    objectId=0x85b12ec8, line=3
+    objectId=0x85b12ec8, line=3
+    objectId=0x85b13070, line=3
+    objectId=0x85b13080, line=3
+    objectId=0x85b12ec8, line=4
+    objectId=0x85b12c78, line=5
+    objectId=0x85b2a5e8, line=6
+
+Thread 0x85b2c6a0
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.ArrayBlockingQueue.take()Ljava/lang/Object; (ArrayBlockingQueue.java:403)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.FSMWorker.run()V (FSMWorker.java:41)
+  at java.lang.Thread.run()V (Thread.java:748)
+
+  locals:
+    objectId=0x85b2c6a0, line=1
+    objectId=0x85b2c818, line=2
+    objectId=0xe6a20000, line=2
+    objectId=0x85b2c830, line=3
+    objectId=0x85b2c860, line=3
+    objectId=0x85b2c870, line=4
+    objectId=0x85b2c6a0, line=5
+
+Thread 0x85b0c708
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.LinkedBlockingDeque.takeFirst()Ljava/lang/Object; (LinkedBlockingDeque.java:492)
+  at java.util.concurrent.LinkedBlockingDeque.take()Ljava/lang/Object; (LinkedBlockingDeque.java:680)
+  at sun.nio.fs.AbstractWatchService.take()Ljava/nio/file/WatchKey; (AbstractWatchService.java:118)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.FileReaderWorker.run()V (FileReaderWorker.java:53)
+  at java.lang.Thread.run()V (Thread.java:748)
+
+  locals:
+    objectId=0x85b0c708, line=1
+    objectId=0xd748b168, line=2
+    objectId=0xd748cdd8, line=2
+    objectId=0xd748b110, line=3
+    objectId=0xd748b138, line=3
+    objectId=0xd748b110, line=4
+    objectId=0xd748af70, line=5
+    objectId=0x85b0c890, line=6
+    objectId=0x85b0c8a8, line=6
+    objectId=0x85b0c8c8, line=6
+    objectId=0xe6a100a0, line=6
+    objectId=0xe6a100d0, line=6
+    objectId=0xd748af70, line=6
+    objectId=0xd79420c0, line=6
+    objectId=0x85b0c708, line=7
+
+Thread 0x85b2e430
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.ArrayBlockingQueue.take()Ljava/lang/Object; (ArrayBlockingQueue.java:403)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.service.PubSubService.getCurrentStreamingBars()V (PubSubService.java:96)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.service.PubSubService.getMessagesForSubscriberOfTopic(Ljava/lang/String;Lcom/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/Subscriber;)V (PubSubService.java:168)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.WebSockerWorker.getMessagesForSubscriberOfTopic(Ljava/lang/String;Lcom/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/service/PubSubService;)V (WebSockerWorker.java:66)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.WebSockerWorker.run()V (WebSockerWorker.java:42)
+  at java.lang.Thread.run()V (Thread.java:748)
+
+  locals:
+    objectId=0x85b2e430, line=1
+    objectId=0x85b2e5a8, line=2
+    objectId=0xe6a18000, line=2
+    objectId=0x85b2e5c0, line=3
+    objectId=0x85b306b0, line=3
+    objectId=0x85b2e5f0, line=4
+    objectId=0x85b2e5f0, line=5
+    objectId=0x85b2e610, line=5
+    objectId=0x85b2e628, line=5
+    objectId=0x85b2e628, line=6
+    objectId=0x85b2e610, line=6
+    objectId=0x85b2e5f0, line=6
+    objectId=0x85b2e628, line=7
+    objectId=0x85b2e430, line=8
+
+Thread 0x85b30538
+  at sun.misc.Unsafe.park(ZJ)V (Native Method)
+  at java.util.concurrent.locks.LockSupport.park(Ljava/lang/Object;)V (LockSupport.java:175)
+  at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await()V (AbstractQueuedSynchronizer.java:2039)
+  at java.util.concurrent.ArrayBlockingQueue.take()Ljava/lang/Object; (ArrayBlockingQueue.java:403)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.service.PubSubService.getCurrentStreamingBars()V (PubSubService.java:96)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.publishersubscriber.service.PubSubService.getMessagesForSubscriberOfTopic(Ljava/lang/String;Lcom/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/Subscriber;)V (PubSubService.java:168)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.WebSockerWorker.getMessagesForSubscriberOfTopic(Ljava/lang/String;Lcom/github/gurpreetsachdeva/OHLCAnalyticsService/publishersubscriber/service/PubSubService;)V (WebSockerWorker.java:66)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.WebSockerWorker.run()V (WebSockerWorker.java:42)
+  at java.lang.Thread.run()V (Thread.java:748)
+
+  locals:
+    objectId=0x85b30538, line=1
+    objectId=0x85b2e5a8, line=2
+    objectId=0xe6a28000, line=2
+    objectId=0x85b2e5c0, line=3
+    objectId=0x85b306b0, line=3
+    objectId=0x85b2e5f0, line=4
+    objectId=0x85b2e5f0, line=5
+    objectId=0x85b306c0, line=5
+    objectId=0x85b306d8, line=5
+    objectId=0x85b306d8, line=6
+    objectId=0x85b306c0, line=6
+    objectId=0x85b2e5f0, line=6
+    objectId=0x85b306d8, line=7
+    objectId=0x85b30538, line=8
+
+Thread 0x85b09988
+
+  locals:
+
+Thread 0x85b09b88
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:144)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:165)
+  at java.lang.ref.Finalizer$FinalizerThread.run()V (Finalizer.java:216)
+
+  locals:
+    objectId=0x85b2e7d0, line=1
+    objectId=0x85b2e7c0, line=1
+    objectId=0x85b2e7d0, line=2
+    objectId=0x85b09b88, line=3
+    objectId=0x85b2e7f0, line=3
+
+Thread 0x85b09d80
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:502)
+  at java.lang.ref.Reference.tryHandlePending(Z)Z (Reference.java:191)
+  at java.lang.ref.Reference$ReferenceHandler.run()V (Reference.java:153)
+
+  locals:
+    objectId=0x85b2b130, line=1
+    objectId=0x85b2b130, line=2
+    objectId=0x85b09d80, line=3
+
+Thread 0x85b13680
+  at java.io.FileInputStream.readBytes([BII)I (Native Method)
+  at java.io.FileInputStream.read([BII)I (FileInputStream.java:255)
+  at java.io.BufferedInputStream.read1([BII)I (BufferedInputStream.java:284)
+  at java.io.BufferedInputStream.read([BII)I (BufferedInputStream.java:345)
+  at sun.nio.cs.StreamDecoder.readBytes()I (StreamDecoder.java:284)
+  at sun.nio.cs.StreamDecoder.implRead([CII)I (StreamDecoder.java:326)
+  at sun.nio.cs.StreamDecoder.read([CII)I (StreamDecoder.java:178)
+  at java.io.InputStreamReader.read([CII)I (InputStreamReader.java:184)
+  at java.io.BufferedReader.fill()V (BufferedReader.java:161)
+  at java.io.BufferedReader.readLine(Z)Ljava/lang/String; (BufferedReader.java:324)
+  at java.io.BufferedReader.readLine()Ljava/lang/String; (BufferedReader.java:389)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.App.startWebSocketServer()V (App.java:67)
+  at com.github.gurpreetsachdeva.OHLCAnalyticsService.App.main([Ljava/lang/String;)V (App.java:45)
+
+  locals:
+    objectId=0x85b2e800, line=0
+    objectId=0x85b2e800, line=0
+    objectId=0x85b2e820, line=1
+    objectId=0x85b38020, line=1
+    objectId=0x85b2e840, line=2
+    objectId=0x85b38020, line=2
+    objectId=0x85b2e840, line=3
+    objectId=0x85b38020, line=3
+    objectId=0x85b2e868, line=4
+    objectId=0x85b2e868, line=5
+    objectId=0x85b3a030, line=5
+    objectId=0x85b2e898, line=5
+    objectId=0x85a00238, line=5
+    objectId=0x85b2e868, line=6
+    objectId=0x85b3a030, line=6
+    objectId=0x85b2e8c8, line=6
+    objectId=0x85b2e8c8, line=7
+    objectId=0x85b3a030, line=7
+    objectId=0x85b2e8e0, line=8
+    objectId=0x85b2e8e0, line=9
+    objectId=0x85b2e8c8, line=9
+    objectId=0x85b2e8e0, line=10
+    objectId=0x85b2e910, line=11
+    objectId=0x85b12c78, line=11
+    objectId=0x85b2e8e0, line=11
+    objectId=0x85b2e938, line=12
+    objectId=0x85b2e910, line=12
+    objectId=0x85b0c708, line=12
+    objectId=0x85b2c6a0, line=12
+
