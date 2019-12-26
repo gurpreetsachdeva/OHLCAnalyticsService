@@ -6,7 +6,9 @@ import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
@@ -24,6 +26,8 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 	private PubSubService service;
 	private String topic;
 	private boolean newSubscriber;
+	private Map<String,List<WebSocket>> topicConnMap=new HashMap<String, List<WebSocket>>();
+	private Map<WebSocket,String>	reverseLookup=new HashMap<>();
 	public boolean isNewSubscriber() {
 		return newSubscriber;
 	}
@@ -60,19 +64,41 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 	public void onClose( WebSocket conn, int code, String reason, boolean remote ) {
 	//	broadcast( conn + " has left the room!" );
 		System.out.println( conn + " has left the room!" );
+		String topic=this.reverseLookup.get(conn);
+		this.topicConnMap.get(topic).remove(conn);
+		this.reverseLookup.remove(conn);
+		
 	}
 
 	@Override
 	public void onMessage( WebSocket conn, String message ) {
 		//broadcast( "Subscribed to "+message );
-		conn.send("Subscribed to "+message);
+		if(message.startsWith("CallbackService")) {
+			
+			conn.send("BarResponse  "+message.substring("CallbackService".length()));
+			
+		}
+		else
+		{
 		
-		this.service.addSubscriber(message, this);
+		
+		conn.send("Subscribed to "+message);
+		this.reverseLookup.put(conn, message);
+		List<WebSocket> connections=this.topicConnMap.get(message);
+		if(connections==null) {
+			connections=new ArrayList<>();
+			this.service.addSubscriber(message, this);
+			
+		}
+		connections.add(conn);
 		new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
-	//	this.service.getMessagesForSubscriberOfTopic(message, this);
-    	//new Thread(new WebSockerWorker(this.service,message),"Web Consumer-"+conn).start();
+
+		this.topicConnMap.put(message,connections);
+		
+		
 		
 		System.out.println( conn + ": " + message );
+		}
 	}
 	@Override
 	public void onMessage( WebSocket conn, ByteBuffer message ) {
@@ -120,11 +146,17 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber{
 
 	@Override
 	public void callBack(String message) {
+		
 		// TODO Auto-generated method stub
+		//Retrieve Symbol from Message
 		System.out.println("In Callback of Subscriber");
-		for(WebSocket S:this.getConnections()) {
+		
+		String sym=message.substring(message.indexOf("symbol")+7);
+		sym=sym.substring(0,sym.indexOf(","));
+	
+		for(WebSocket S:this.topicConnMap.get(sym)) {
 			
-			this.onMessage(S, message);
+			this.onMessage(S, "CallbackService"+message);
 			
 		}
 	}
