@@ -49,7 +49,7 @@ public class FileReaderWorker implements Runnable {
 			try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
 			    final WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
 			    while (true) {
-			    	System.out.println("Upstream Feed will write and I will do my work ;)");
+			    	//System.out.println("Upstream Feed will write and I will do my work ;)");
 			        final WatchKey wk = watchService.take();
 			        for (WatchEvent<?> event : wk.pollEvents()) {
 			            //we only register "ENTRY_MODIFY" so the context is always a Path.
