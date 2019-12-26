@@ -114,7 +114,7 @@ Test Run for Checking Streaming Data:
 4. cat new.json >> trades.json
 5 You will observe that your UI client will get refreshed by the New Trades. I just utilized the 
 
-
+Tar Without .git to keep the blob from expanding : tar cvz --exclude=".git" -f OHLCAnalyticsService.tar.gz OHLCAnalyticsService/
 
 ToDos
 ========
