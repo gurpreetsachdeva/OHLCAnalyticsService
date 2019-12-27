@@ -176,6 +176,7 @@ Steps for WatchService Test
 2. Open the subscriber and subscribe to something which is not there in ticker list.For e.g GURU and now we are going to 
 stream trades for GURU.
 3. cat trades.json |grep XETHZUSD > new.json
+4. Replace XETHZUSD with guru in vim. vim new.json :%s/XETHZUSD/GURU/g :wq
 4. cat new.json >>trades.json
 5. Your UI should have refreshed by "GURU" Trades.
 
