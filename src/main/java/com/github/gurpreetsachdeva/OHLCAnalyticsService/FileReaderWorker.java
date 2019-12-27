@@ -37,11 +37,11 @@ public class FileReaderWorker implements Runnable {
 			String line = reader.readLine();
 			JSONObject obj =null;
 			if (line != null) {
-				 obj = (JSONObject) jsonParser.parse(line);
+				 obj = parseEachLineGracefully(jsonParser,line);
 			}
 			while (line != null) {
 				parseTradeLine(obj);
-				obj = (JSONObject) jsonParser.parse(line);
+				obj = parseEachLineGracefully(jsonParser,line);
 				line = reader.readLine();
 			}
 
@@ -62,7 +62,7 @@ public class FileReaderWorker implements Runnable {
 							line = reader.readLine();
 							System.out.println("line Entered" + line);
 							if (line != null) {
-								obj = (JSONObject) jsonParser.parse(line);
+								obj = parseEachLineGracefully(jsonParser,line);
 
 							}
 
@@ -70,7 +70,7 @@ public class FileReaderWorker implements Runnable {
 
 								parseTradeLine(obj);
 
-								obj = (JSONObject) jsonParser.parse(line);
+								obj = parseEachLineGracefully(jsonParser,line);
 								line = reader.readLine();
 							}
 						}
@@ -87,7 +87,7 @@ public class FileReaderWorker implements Runnable {
 			}
 
 			reader.close();
-		} catch (IOException | ParseException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -133,4 +133,19 @@ public class FileReaderWorker implements Runnable {
 		return fullPath.substring(index + 1);
 	}
 
+	private JSONObject parseEachLineGracefully(JSONParser jsonParser,String line) {
+		
+		try {
+			return (JSONObject) jsonParser.parse(line);
+		}
+		
+		catch (ParseException e) {
+			// TODO: handle exception
+			System.out.println("See this line carefully , it threw a parsing exception:"+line);
+			e.printStackTrace();
+		}
+		return null;
+		
+		
+	}
 }
