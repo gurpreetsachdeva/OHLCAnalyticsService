@@ -87,7 +87,8 @@ public class PubSubService {
 	 */
 	// Sends BarResponses about a topic for subscriber at any point
 	// , Subscriber subscriber
-	public void getCurrentStreamingBars() {
+	//For any response in the queue make sure that you process it in order , otherwise the bars order might not be natural.
+	public synchronized void getCurrentStreamingBars() {
 		System.out.println("Streaming new Entries in the file");
 
 		BarResponse br;
