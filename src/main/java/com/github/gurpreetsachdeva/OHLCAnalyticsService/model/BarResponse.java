@@ -1,5 +1,8 @@
 package com.github.gurpreetsachdeva.OHLCAnalyticsService.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BarResponse {
 	
 	//Sample Object
@@ -99,12 +102,22 @@ public class BarResponse {
 	@Override
 	public String toString() {
 		return "BarResponse [o=" + o + ", l=" + l + ", h=" + h + ", c=" + c + ", v=" + v + ", previous=" + previous
-				+ ", bar_num=" + bar_num + ", event=" + event + ", symbol=" + symbol + ", ts2=" + ts2 + ", noOfTrades="
+				+ ", bar_num=" + bar_num + ", event=" + event + ", symbol=" + symbol + ", ts2=" + formatNanoSeconds(ts2) + ", noOfTrades="
 				+ noOfTrades + "]";
 	}
+	public String formatNanoSeconds(Long nanoSeconds) {
+		
+	Long milliSeconds= nanoSeconds/1000000;
+	System.out.println(milliSeconds);
+	Date date = new java.util.Date(milliSeconds); 
+	// the format of your date
+	SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS"); 
+	sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT")); 
+	String formattedDate = sdf.format(date);
+	return formattedDate;
 	
 	
-	
+	}
 	
 	
 	
