@@ -65,6 +65,10 @@ Steps To Run ?
 	
 	java -Xmx3048M -XX:PermSize=1048M -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
 	
+	Debugging : netstat -ano|grep 8887 
+	
+	Make sure that socket is not in bind state otherwise you have to wait before restarting the daemon.
+	
 
 	
 	sudo apt-get install openjdk-8-jdk
@@ -117,6 +121,7 @@ Test Run for Checking Streaming Data:
 3. Open the UI and subscribe to let us say ABC.
 4. You will see not see any output for ABC tickers as it is not in the trade file yet.
 5. Replace the XMLNXETH to ABC for generating new set of Trades. What works better than vim for this. %s/XMLNXETH/ABC/g
+Also change time if you are doing for an old ticker.
 3. Append new.json to trades.json , so this acts as a feeder for me.
 4. cat new.json >> trades.json
 5 You will observe that your UI client will get refreshed by the New Trades. I just utilized the 
