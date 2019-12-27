@@ -94,9 +94,11 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber {
 			// Dont Create new Threads everytime , instead for every topic there should be a
 			// consumption thread running.
 			List<BarResponse> history = this.service.getHistoryBars(message);
-			for (BarResponse br : history) {
-				conn.send("BarResponse  " + br);
+			if (history != null) {
+				for (BarResponse br : history) {
+					conn.send("BarResponse  " + br);
 
+				}
 			}
 
 			this.topicConnMap.put(message, connections);
@@ -159,10 +161,14 @@ public class TradeBarUpdater extends WebSocketServer implements Subscriber {
 		String sym = message.substring(message.indexOf("symbol") + 7);
 		sym = sym.substring(0, sym.indexOf(","));
 
-		for (WebSocket S : this.topicConnMap.get(sym)) {
+		List<WebSocket> sockets = this.topicConnMap.get(sym);
+		System.out.println(sockets + "	" + sym);
+		if (sockets != null) {
+			for (WebSocket S : sockets) {
 
-			this.onMessage(S, "CallbackService" + message);
+				this.onMessage(S, "CallbackService" + message);
 
+			}
 		}
 	}
 

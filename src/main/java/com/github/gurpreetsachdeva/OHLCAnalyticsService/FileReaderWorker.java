@@ -35,7 +35,10 @@ public class FileReaderWorker implements Runnable {
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
 			String line = reader.readLine();
-			JSONObject obj = (JSONObject) jsonParser.parse(line);
+			JSONObject obj =null;
+			if (line != null) {
+				 obj = (JSONObject) jsonParser.parse(line);
+			}
 			while (line != null) {
 				parseTradeLine(obj);
 				obj = (JSONObject) jsonParser.parse(line);
@@ -43,41 +46,45 @@ public class FileReaderWorker implements Runnable {
 			}
 
 			// Add the Watcher Service
-			
-			final Path path = FileSystems.getDefault().getPath(getDirectory(filePath));
-			//System.out.println(path);
-			try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
-			    final WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
-			    while (true) {
-			    	//System.out.println("Upstream Feed will write and I will do my work ;)");
-			        final WatchKey wk = watchService.take();
-			        for (WatchEvent<?> event : wk.pollEvents()) {
-			            //we only register "ENTRY_MODIFY" so the context is always a Path.
-			            final Path changed = (Path) event.context();
-			            System.out.println(changed);
-			            if (changed.endsWith(getFileName(filePath))) {
-			            	line=reader.readLine();
-			    			 obj = (JSONObject) jsonParser.parse(line);
 
-			                while(line!=null) {
-			                	
-			                	parseTradeLine(obj);
-			    				obj = (JSONObject) jsonParser.parse(line);
-			    				line = reader.readLine();
-			                }
-			            }
-			        }
-			        // reset the key
-			        boolean valid = wk.reset();
-			        if (!valid) {
-			            System.out.println("Key has been unregisterede");
-			        }
-			    }
+			final Path path = FileSystems.getDefault().getPath(getDirectory(filePath));
+			// System.out.println(path);
+			try (final WatchService watchService = FileSystems.getDefault().newWatchService()) {
+				final WatchKey watchKey = path.register(watchService, StandardWatchEventKinds.ENTRY_MODIFY);
+				while (true) {
+					// System.out.println("Upstream Feed will write and I will do my work ;)");
+					final WatchKey wk = watchService.take();
+					for (WatchEvent<?> event : wk.pollEvents()) {
+						// we only register "ENTRY_MODIFY" so the context is always a Path.
+						final Path changed = (Path) event.context();
+						// System.out.println(changed);
+						if (changed.endsWith(getFileName(filePath))) {
+							line = reader.readLine();
+							System.out.println("line Entered" + line);
+							if (line != null) {
+								obj = (JSONObject) jsonParser.parse(line);
+
+							}
+
+							while (line != null) {
+
+								parseTradeLine(obj);
+
+								obj = (JSONObject) jsonParser.parse(line);
+								line = reader.readLine();
+							}
+						}
+					}
+					// reset the key
+					boolean valid = wk.reset();
+					if (!valid) {
+						System.out.println("Key has been unregisterede");
+					}
+				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 
 			reader.close();
 		} catch (IOException | ParseException e) {
@@ -89,17 +96,19 @@ public class FileReaderWorker implements Runnable {
 	}
 
 	private void parseTradeLine(JSONObject obj) {
-		Double price = Double.valueOf(String.valueOf(obj.get("P")));
-		Long time = Long.valueOf(String.valueOf((obj.get("TS2"))));
-		String sym = (String) obj.get("sym");
-		Double quantity = Double.valueOf(String.valueOf(obj.get("Q")));
-		TradesData td = new TradesData(sym, price, quantity, time);
+		if (obj != null) {
+			Double price = Double.valueOf(String.valueOf(obj.get("P")));
+			Long time = Long.valueOf(String.valueOf((obj.get("TS2"))));
+			String sym = (String) obj.get("sym");
+			Double quantity = Double.valueOf(String.valueOf(obj.get("Q")));
+			TradesData td = new TradesData(sym, price, quantity, time);
 
-		try {
-			queue.put(td);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				queue.put(td);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
