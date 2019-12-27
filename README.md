@@ -134,6 +134,7 @@ Load Test
 
 30 tickers
 ====================================================================
+
 1. XETHZUSD
 2. XXBTZUSD
 3. XXRPXXBT
@@ -164,8 +165,6 @@ Load Test
 28.XMLNXXBT
 29.GNOETH
 30.XMLNXETH
-
-
 
 Memory Analysis using MAT
 ===================================
