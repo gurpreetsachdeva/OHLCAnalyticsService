@@ -152,7 +152,7 @@ public class FileReaderWorker implements Runnable {
 private String readEachLineGracefully(BufferedReader reader) throws IOException {
 		
 		String line= reader.readLine();
-		while(!line.endsWith("}")) {
+		while(line!=null && !line.endsWith("}")) {
 			line=line+reader.readLine();
 		}
 		return line;
