@@ -202,6 +202,16 @@ Some Important Points and Commands To Remember:
 -XX:PermSize=1048M -Xmx2048M options are must understand
 3. https://dzone.com/articles/troubleshoot-outofmemoryerror-unable-to-create-new
 
+
+Corner Cases
+=========================
+1. Trades sometimes span multiple lines. So add at the appropriate checks. This happened with the feeder so it was fair to handle it.
+2. Tested With a heavy file of 10G and it works well. We expect the trades files to roll over but even if someone forgets to rollover ,it should work.
+3. Multiple Subscribers with same ticker works.
+4. Streaming by different threads(consumers) must be synchronized. Otherwise the order of the bars will change. In real life it may matter or not due to less latency but the order is kept in the current program.
+
+3. 
 ToDos
 ========
 1. Make everything configurable by reading through property file and not dependent on App Driver class constants.
+2. Refactor and merger both Java Command Line Consumer(Web Socker Worker) and WebSocket Server consumer.
