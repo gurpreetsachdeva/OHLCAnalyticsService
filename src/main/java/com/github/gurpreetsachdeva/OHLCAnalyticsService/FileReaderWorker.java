@@ -34,7 +34,7 @@ public class FileReaderWorker implements Runnable {
 		BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
-			String line = reader.readLine();
+			String line = readEachLineGracefully(reader);
 			JSONObject obj =null;
 			if (line != null) {
 				 obj = parseEachLineGracefully(jsonParser,line);
@@ -42,7 +42,7 @@ public class FileReaderWorker implements Runnable {
 			while (line != null) {
 				parseTradeLine(obj);
 				obj = parseEachLineGracefully(jsonParser,line);
-				line = reader.readLine();
+				line = readEachLineGracefully(reader);
 			}
 
 			// Add the Watcher Service
@@ -59,7 +59,7 @@ public class FileReaderWorker implements Runnable {
 						final Path changed = (Path) event.context();
 						// System.out.println(changed);
 						if (changed.endsWith(getFileName(filePath))) {
-							line = reader.readLine();
+							line = readEachLineGracefully(reader);
 							System.out.println("line Entered" + line);
 							if (line != null) {
 								obj = parseEachLineGracefully(jsonParser,line);
@@ -71,7 +71,7 @@ public class FileReaderWorker implements Runnable {
 								parseTradeLine(obj);
 
 								obj = parseEachLineGracefully(jsonParser,line);
-								line = reader.readLine();
+								line = readEachLineGracefully(reader);
 							}
 						}
 					}
@@ -146,6 +146,16 @@ public class FileReaderWorker implements Runnable {
 		}
 		return null;
 		
+		
+	}
+	
+private String readEachLineGracefully(BufferedReader reader) throws IOException {
+		
+		String line= reader.readLine();
+		while(!line.endsWith("}")) {
+			line=line+reader.readLine();
+		}
+		return line;
 		
 	}
 }
