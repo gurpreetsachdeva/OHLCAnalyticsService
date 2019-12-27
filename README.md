@@ -65,6 +65,10 @@ Steps To Run ?
 	
 	java -Xmx3048M -XX:PermSize=1048M -jar target/OHLCAnalyticsService-0.0.1-SNAPSHOT-jar-with-dependencies.jar Worker3:XMLNXETH worker4:EOSXBT filePath:./trades.json
 	
+	Debugging : netstat -ano|grep 8887 
+	
+	Make sure that socket is not in bind state otherwise you have to wait before restarting the daemon.
+	
 
 	
 	sudo apt-get install openjdk-8-jdk
