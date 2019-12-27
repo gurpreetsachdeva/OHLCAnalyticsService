@@ -166,6 +166,20 @@ Load Test
 29. GNOETH
 30. XMLNXETH
 
+WatchService Streaming Test Explained:
+===================================================
+1. Instead of writing a text file updater client I used unix commands to create a quick feeder in place.
+
+Steps for WatchService Test
+===============================
+1. Make sure that Daemon is running.
+2. Open the subscriber and subscribe to something which is not there in ticker list.For e.g GURU and now we are going to 
+stream trades for GURU.
+3. cat trades.json |grep XETHZUSD > new.json
+4. cat new.json >>trades.json
+5. Your UI should have refreshed by "GURU" Trades.
+
+
 Memory Analysis using MAT
 ===================================
 1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in the folder Perfomance inside Screenshots folder.
