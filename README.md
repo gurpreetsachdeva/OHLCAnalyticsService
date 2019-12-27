@@ -74,6 +74,7 @@ Steps To Run ?
 	Running with a Streamer :
 	
 	python feed.py trades.json
+	
 	This will keep on appending file with a ticker "GURU", We can use a dict to get a random ticker but this will be updated later.
 	sudo apt-get install openjdk-8-jdk
 	
