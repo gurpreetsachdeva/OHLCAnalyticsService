@@ -67,10 +67,14 @@ Steps To Run ?
 	
 	Debugging : netstat -ano|grep 8887 
 	
+	
 	Make sure that socket is not in bind state otherwise you have to wait before restarting the daemon.
 	
 
+	Running with a Streamer :
 	
+	python feed.py trades.json
+	This will keep on appending file with a ticker "GURU", We can use a dict to get a random ticker but this will be updated later.
 	sudo apt-get install openjdk-8-jdk
 	
 	sudo apt install maven
