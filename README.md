@@ -123,6 +123,49 @@ Test Run for Checking Streaming Data:
 
 Tar Without .git to keep the blob from expanding : tar cvz --exclude=".git" -f OHLCAnalyticsService.tar.gz OHLCAnalyticsService/
 
+Load Test
+==========================
+1. For the below 30 tickers open up parallel connections in chrome and see if you are getting the right bars.
+2. Results are shared in Screenshots/Load
+3. Passed with 30 Tickers.
+4. Additional part[Sanity test],while taking screenshots just verify the count given by TradeTest Python helper matches with the return result by Java Web Consumers. Also passes.
+5. Automate the load test using Selenium [Not Done yet]
+
+
+30 tickers
+====================================================================
+1. XETHZUSD
+2. XXBTZUSD
+3. XXRPXXBT
+4. ADAEUR
+5. XETHXXBT
+6. ADAXBT
+7. XLTCZUSD
+8. QTUMEUR
+9. QTUMXBT
+10.XXLMXXBT
+11.EOSXBT
+12.XLTCXXBT
+13.ADAUSD
+14.XREPXXBT
+15.BCHXBT
+16.XXMRXXBT
+17.
+18.
+19.
+20.
+21.
+22
+23.
+24.
+25.
+26.
+27.
+28.
+29.
+30.
+
+
 Memory Analysis using MAT
 ===================================
 1. Create Heap Dumps and Analysed them in eclipse. Attach the screenshots in the folder Perfomance inside Screenshots folder.
